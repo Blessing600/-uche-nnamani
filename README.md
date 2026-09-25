@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# uchennamani.com
 
-## Getting Started
-
-First, run the development server:
+Next.js (App Router) · TypeScript · Tailwind CSS · MDX
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # http://localhost:3000
+npm run build   # production build (all pages are static)
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Adding writing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create `content/writing/<slug>.mdx`. The file name must match `slug`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```mdx
+---
+title: "Why I Don't Start With the App"
+slug: "why-i-dont-start-with-the-app"
+date: "2026-08-28"
+description: "The case for starting with people, not technology."
+published: true   # false hides it everywhere (lists, sitemap, route)
+featured: true    # featured posts appear under "Latest writing" on the homepage (newest 4)
+---
 
-## Learn More
+Essay in Markdown…
+```
 
-To learn more about Next.js, take a look at the following resources:
+Case studies live in `content/work/<slug>.mdx` (see the existing two for the frontmatter fields).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Adding press
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Add an entry to `content/press.json` (any order — the page sorts newest first):
 
-## Deploy on Vercel
+```json
+{
+  "date": "2026-08-29",
+  "publication": "ThisDay",
+  "title": "Article headline",
+  "description": "One-line summary (optional).",
+  "url": "https://…"
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Entries with an empty `url` show without a link; once a URL is added they open in a new tab with a ↗.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## About portrait
+
+Save the photo as `public/uche-nnamani.jpg` (portrait orientation, ideally 4:5, at least 1200px tall) and rebuild. It replaces the placeholder frame automatically.
+
+## Before launch
+
+- Add the article URLs in `content/press.json`.
+- Add the portrait (see above).
+- Search for `<Placeholder` and replace each one with real copy. The four essays are drafts written from the brief and should be replaced with Uche's own words.
+- To add a product image to a case study, drop it in `public/` and reference it in the MDX: `![Alt text](/image.jpg)`.

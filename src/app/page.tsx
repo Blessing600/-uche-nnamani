@@ -1,69 +1,163 @@
+import type { Metadata } from "next";
+import { Fragment } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowLink } from "@/components/arrow-link";
+import { Container } from "@/components/container";
+import { JsonLd } from "@/components/json-ld";
+import { PostList } from "@/components/post-list";
+import { Section } from "@/components/section";
+import { getPosts, getProjects } from "@/lib/content";
+import { pageMetadata, person, website } from "@/lib/seo";
+import { site } from "@/lib/site";
+import howIBuildPhoto from "../../public/images/how-i-build.jpg";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Uche Nnamani | Founder of Fitness Space & Co-founder of AERA",
+  description: site.description,
+  path: "/",
+  // Uses the file-based src/app/opengraph-image.tsx.
+  image: false,
+});
+
+const steps = ["Problem", "People", "Test", "Learn", "Build", "Scale"];
 
 export default function Home() {
+  const projects = getProjects();
+  const posts = getPosts()
+    .filter((post) => post.featured)
+    .slice(0, 4);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <Container>
+      <JsonLd
+        data={{ "@context": "https://schema.org", "@graph": [website, person] }}
+      />
+
+      {/* Introduction */}
+      <div className="rise pt-[calc(var(--spacing-hero)*0.6)] pb-hero">
+        <h1 className="max-w-[12em] font-serif text-display sm:text-balance">
+          I build products around real problems.
+        </h1>
+        <p className="mt-10 max-w-[34rem] text-lede text-ink-soft sm:mt-12">
+          I&rsquo;m{" "}
+          <Link href="/about" className="link-underlined">
+            Uche Nnamani
+          </Link>
+          , founder and CEO of{" "}
+          <Link href="/work/fitness-space" className="link-underlined">
+            Fitness Space
+          </Link>{" "}
+          and co-founder of{" "}
+          <Link href="/work/aera" className="link-underlined">
+            AERA
+          </Link>
+          . I like starting with people, testing ideas
+          cheaply, and building technology when we understand what actually
+          needs to exist.
+        </p>
+        <ArrowLink href="/writing" className="mt-10 sm:mt-12">
+          Read my thinking
+        </ArrowLink>
+      </div>
+
+      <div className="flex flex-col gap-section">
+        {/* What I'm building */}
+        {/* Each logo sits in the margin column beside its own entry. */}
+        <section
+          id="building"
+          aria-labelledby="building-heading"
+          className="grid gap-y-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] md:gap-x-12 md:gap-y-24"
+        >
+          {projects.map((project, i) => (
+            <Fragment key={project.slug}>
+              <div className={`md:pt-2 ${i > 0 ? "mt-10 md:mt-0" : ""}`}>
+                {i === 0 && (
+                  <h2 id="building-heading" className="label mb-8 md:mb-10">
+                    What I&rsquo;m building
+                  </h2>
+                )}
+                {project.logo && (
+                  <Image
+                    src={project.logo.src}
+                    width={project.logo.width}
+                    height={project.logo.height}
+                    alt={`${project.title} logo`}
+                    sizes="(min-width: 1200px) 17rem, (min-width: 768px) 24vw, 100vw"
+                    className="w-full max-w-[26rem] md:max-w-none"
+                  />
+                )}
+              </div>
+              <article className="min-w-0">
+                <p className="label text-ink">{project.title}</p>
+                <h3 className="mt-5 max-w-[22ch] font-serif text-title text-balance">
+                  {project.headline}
+                </h3>
+                <p className="mt-6 max-w-[36rem] leading-[1.7] text-ink-soft">
+                  {project.summary}
+                </p>
+                <ArrowLink href={`/work/${project.slug}`} className="mt-8">
+                  Explore {project.title}
+                </ArrowLink>
+              </article>
+            </Fragment>
+          ))}
+        </section>
+
+        {/* How I build */}
+        <Section
+          label="How I build"
+          id="philosophy"
+          aside={
             <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+              src={howIBuildPhoto}
+              alt="An open notebook of handwritten notes (the problem, start simple, what we learn, then build) beside a phone showing the Fitness Space app"
+              placeholder="blur"
+              sizes="(min-width: 1200px) 17rem, (min-width: 768px) 24vw, 100vw"
+              className="w-full max-w-[26rem] md:max-w-none"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          }
+        >
+          <p className="max-w-[18ch] font-serif text-statement text-balance">
+            Start with the problem, not the product.
+          </p>
+          <div className="mt-10 max-w-[36rem] space-y-5 leading-[1.7] text-ink-soft">
+            <p>I don&rsquo;t believe every idea should become an app.</p>
+            <p>
+              I prefer to start close to the problem, find the people
+              experiencing it, build the cheapest useful experiment, watch
+              what they actually do, and only then decide what technology
+              needs to exist.
+            </p>
+          </div>
+          <p className="mt-12 flex flex-wrap gap-x-2.5 gap-y-1 font-serif text-[1.1875rem] text-ink italic sm:gap-x-3 sm:text-[1.3125rem]">
+            {steps.map((step, i) => (
+              <span key={step} className="whitespace-nowrap">
+                {step}
+                {i < steps.length - 1 && (
+                  <span aria-hidden className="ml-2.5 not-italic text-ink-faint sm:ml-3">
+                    →
+                  </span>
+                )}
+              </span>
+            ))}
+          </p>
+          <ArrowLink
+            href="/writing/the-app-is-not-the-product"
+            className="mt-12"
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            Read my product philosophy
+          </ArrowLink>
+        </Section>
+
+        {/* Latest writing */}
+        <Section label="Latest writing" id="writing">
+          <PostList posts={posts} />
+          <ArrowLink href="/writing" className="mt-10">
+            All writing
+          </ArrowLink>
+        </Section>
+      </div>
+    </Container>
   );
 }
