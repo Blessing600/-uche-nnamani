@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   description: site.description,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
+  // Google Search Console ownership check for https://www.uchennamani.com
+  verification: { google: "VoqSVW0hJu8aZlu82v2jNa6sC_ZK209U7idTIKYnAlY" },
   // Preview and branch deploys must never compete with uchennamani.com.
   ...(!isIndexable && { robots: { index: false, follow: false } }),
   openGraph: {
