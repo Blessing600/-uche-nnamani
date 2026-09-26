@@ -41,7 +41,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           </ArrowLink>
           <h1 className="mt-16 label text-ink sm:mt-20">{project.title}</h1>
           <p className="mt-6 font-serif text-statement text-balance">
-            {project.headline}
+            {project.caseHeadline ?? project.headline}
           </p>
           {project.website && (
             <a
@@ -89,7 +89,13 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           description: project.description,
           "@id": `${site.url}/work/${slug}#organization`,
           url: project.website ?? `${site.url}/work/${slug}`,
-          founder: person,
+          founder: [
+            person,
+            ...(project.cofounders ?? []).map((name) => ({
+              "@type": "Person",
+              name,
+            })),
+          ],
         }}
       />
     </Container>

@@ -48,9 +48,11 @@ export default function WorkPage() {
               <p className="mt-5 max-w-[22ch] font-serif text-title text-balance">
                 {project.headline}
               </p>
-              <p className="mt-6 max-w-[36rem] leading-[1.7] text-ink-soft">
-                {project.summary}
-              </p>
+              <div className="mt-6 max-w-[36rem] space-y-4 leading-[1.7] text-ink-soft">
+                {project.summary.split(/\n\s*\n/).map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
               {project.products && (
                 <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-serif text-[1.0625rem] text-ink italic">
                   {project.products.map((product) => (

@@ -93,9 +93,11 @@ export default function Home() {
                 <h3 className="mt-5 max-w-[22ch] font-serif text-title text-balance">
                   {project.headline}
                 </h3>
-                <p className="mt-6 max-w-[36rem] leading-[1.7] text-ink-soft">
-                  {project.summary}
-                </p>
+                <div className="mt-6 max-w-[36rem] space-y-4 leading-[1.7] text-ink-soft">
+                  {project.summary.split(/\n\s*\n/).map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
                 <ArrowLink href={`/work/${project.slug}`} className="mt-8">
                   Explore {project.title}
                 </ArrowLink>

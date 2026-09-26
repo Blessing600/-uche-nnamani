@@ -29,7 +29,9 @@ export type Project = {
   title: string;
   slug: string;
   headline: string;
-  summary: string;
+  caseHeadline?: string; // case-study page headline, when it differs from `headline`
+  summary: string; // blank lines separate paragraphs
+
   description: string;
   order: number;
   products?: string[];
@@ -37,6 +39,7 @@ export type Project = {
   website?: string;
   updated?: string; // YYYY-MM-DD, set when the case study is materially revised
   logo?: { src: string; width: number; height: number };
+  cofounders?: string[]; // co-founders other than Uche, for structured data
 };
 
 function readFrontmatter(
