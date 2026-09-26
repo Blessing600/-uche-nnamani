@@ -1,7 +1,20 @@
 import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  async redirects() {
+    return [
+      // Keep Vercel's default production address from competing with
+      // the real domain in search results.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "uche-nnamani.vercel.app" }],
+        destination: "https://www.uchennamani.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
+};
 
 const withMDX = createMDX({
   options: {
