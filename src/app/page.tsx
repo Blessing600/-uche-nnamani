@@ -24,8 +24,10 @@ const steps = ["Problem", "People", "Test", "Learn", "Build", "Scale"];
 
 export default function Home() {
   const projects = getProjects();
+  // Latest first here; the Thoughts in Ink page uses its own display order.
   const posts = getPosts()
     .filter((post) => post.featured)
+    .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 4);
 
   return (
@@ -152,11 +154,11 @@ export default function Home() {
           </ArrowLink>
         </Section>
 
-        {/* Latest writing */}
-        <Section label="Latest writing" id="writing">
+        {/* Latest from Thoughts in Ink */}
+        <Section label="Thoughts in Ink" id="writing">
           <PostList posts={posts} />
           <ArrowLink href="/writing" className="mt-10">
-            All writing
+            All essays
           </ArrowLink>
         </Section>
       </div>

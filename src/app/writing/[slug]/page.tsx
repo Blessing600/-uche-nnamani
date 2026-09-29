@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLink } from "@/components/arrow-link";
 import { Container } from "@/components/container";
 import { JsonLd } from "@/components/json-ld";
+import { PostImage } from "@/components/post-image";
 import { formatDate, getPost, getPostContent, getPosts } from "@/lib/content";
 import { pageMetadata, person, PERSON_ID } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -43,7 +44,7 @@ export default async function PostPage({ params }: PageProps<"/writing/[slug]">)
       <article>
         <header className="pt-12 pb-16 sm:pt-20 sm:pb-20">
           <ArrowLink href="/writing" back className="text-ink-faint">
-            Writing
+            Thoughts in Ink
           </ArrowLink>
           <h1 className="mt-16 font-serif text-statement text-balance sm:mt-20">
             {post.title}
@@ -59,12 +60,16 @@ export default async function PostPage({ params }: PageProps<"/writing/[slug]">)
           </p>
         </header>
 
+        <figure className="mb-16 sm:mb-20">
+          <PostImage post={post} sizes="(min-width: 768px) 42rem, 100vw" preload />
+        </figure>
+
         <div className="prose">
           <Content />
         </div>
 
         <footer className="mt-24 border-t border-rule pt-10">
-          <ArrowLink href="/writing">More writing</ArrowLink>
+          <ArrowLink href="/writing">More from Thoughts in Ink</ArrowLink>
         </footer>
       </article>
 

@@ -18,7 +18,7 @@ export default async function Image({
   const { slug } = await params;
   const post = getPost(slug);
   return new ImageResponse(
-    <OgCard title={post?.title ?? "Writing"} eyebrow="Writing" />,
+    <OgCard title={post?.title ?? "Thoughts in Ink"} eyebrow="Thoughts in Ink" />,
     size,
   );
 }

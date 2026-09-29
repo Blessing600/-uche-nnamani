@@ -23,6 +23,8 @@ export type Post = {
   published: boolean;
   featured: boolean;
   updated?: string; // YYYY-MM-DD, set when an essay is materially revised
+  order?: number; // display position in Thoughts in Ink; unordered essays follow, newest first
+  image?: { src: string; alt: string }; // 3:2 photo in public/images/writing/
 };
 
 export type Project = {
@@ -80,9 +82,17 @@ export function getPosts(): Post[] {
       published: data.published !== false,
       featured: data.featured === true,
       updated: data.updated ? String(data.updated) : undefined,
+      order: typeof data.order === "number" ? data.order : undefined,
+      image: data.image
+        ? { src: String(data.image), alt: String(data.imageAlt ?? "") }
+        : undefined,
     }))
     .filter((post) => post.published)
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort(
+      (a, b) =>
+        (a.order ?? Infinity) - (b.order ?? Infinity) ||
+        b.date.localeCompare(a.date),
+    );
 }
 
 export function getPost(slug: string): Post | undefined {

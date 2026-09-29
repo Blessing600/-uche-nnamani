@@ -3,7 +3,7 @@ import { Container } from "./container";
 
 const nav = [
   { href: "/work", label: "Work" },
-  { href: "/writing", label: "Writing" },
+  { href: "/writing", label: "Thoughts in Ink" },
   { href: "/press", label: "Press" },
   { href: "/about", label: "About" },
 ];
