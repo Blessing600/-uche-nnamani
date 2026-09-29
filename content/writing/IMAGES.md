@@ -1,12 +1,12 @@
 # Thoughts in Ink — article images
 
 Each essay shows one photo on the listing and at the top of its page.
-Until a photo is added, the site shows a dashed "Image to add" frame.
+If an essay has no `image`, the site shows a dashed "Image to add" frame.
 
 ## Adding a photo
 
 1. Crop to **3:2** landscape, at least **1800 × 1200 px**, and export as JPEG
-   (quality ~80, under ~400 KB). Next.js serves resized versions automatically.
+   (quality ~80, under ~500 KB). Next.js serves resized versions automatically.
 2. Save it as `public/images/writing/<slug>.jpg`.
 3. Add to the essay's frontmatter:
 
@@ -16,16 +16,31 @@ Until a photo is added, the site shows a dashed "Image to add" frame.
    ```
 
 Use only your own photos (with the consent of anyone pictured) or properly
-licensed ones (e.g. Unsplash). No watermarks, no hotlinking.
+licensed ones. No watermarks, no hotlinking.
 Keep a consistent style: natural light, restrained colour.
 
-## Required images
+## Current images
 
-| # | Essay | Photo needed | Avoid |
-|---|-------|--------------|-------|
-| 1 | What 42.2 Kilometres Does to Your Mind | Preferably your own photo from the Enugu City International Marathon. Otherwise a solitary long-distance runner on a quiet road at sunrise, atmospheric and cinematic. | — |
-| 2 | The Ideas We Carry From Other People | An open notebook with handwritten notes or a personal letter, with a pen, in warm natural light. | Dashboards, Health Score screenshots |
-| 3 | Consistency Is a Cheat Code | A person reading or writing beside a window in natural afternoon light. | Motivational posters, business graphics, exaggerated fitness imagery |
-| 4 | WhatsApp Might Be Africa’s Most Underrated MVP Platform | Candid, documentary-style photo of people using smartphones in an everyday African setting. | Software-development imagery, a large WhatsApp logo |
-| 5 | The App Is Not the Product | Preferably the Fitness Space team working with members or on the service. Otherwise a small team reviewing handwritten observations, discussing feedback or mapping a workflow. | Laptop-and-phone desks, app mockups, code screens, abstract tech art |
-| 6 | We Were Not Doctors. But We Were Paying Attention. | Preferably a consented photo of the Fitness Space community or team in a wellness setting. Otherwise women in a group wellness activity, such as walking together or getting general nutrition guidance. Must not imply diagnosis, treatment or cure. | White coats, hospital equipment, scans, anatomical illustrations, before-and-after photos |
+All from Unsplash, free under the [Unsplash License](https://unsplash.com/license)
+(no attribution required; credited here for reference). Downloaded, cropped
+to 1800 × 1200 and stored in `public/images/writing/`.
+
+| # | Essay (file) | Photo | Alt text |
+|---|--------------|-------|----------|
+| 1 | `what-42-2-kilometres-does-to-your-mind.jpg` | Lucas Favre — [JnoNcfFwrNA](https://unsplash.com/photos/JnoNcfFwrNA) | A lone runner silhouetted on a wet road as the sun comes up |
+| 2 | `the-ideas-we-carry-from-other-people.jpg` | Aaron Burden — [CKlHKtCJZKk](https://unsplash.com/photos/CKlHKtCJZKk) | A fountain pen resting on the handwritten pages of an open notebook |
+| 3 | `consistency-is-a-cheat-code.jpg` | Yuri Efremov — [lCAbfVDdI9Q](https://unsplash.com/photos/lCAbfVDdI9Q) | A woman reading by an open window in warm afternoon light |
+| 4 | `whatsapp-might-be-africas-most-underrated-mvp-platform.jpg` | Francis Odeyemi — [O8SpYxOFnK8](https://unsplash.com/photos/O8SpYxOFnK8) | Two friends standing on a street in Lagos, looking at their phones together |
+| 5 | `the-app-is-not-the-product.jpg` | Sweet Life — [v7XG_VbVABM](https://unsplash.com/photos/v7XG_VbVABM) | A small team around a table, sketching ideas by hand on sheets of paper |
+| 6 | `we-were-not-doctors-but-we-were-paying-attention.jpg` | Photographe EVJF Greg — [ZElvitmX6EM](https://unsplash.com/photos/ZElvitmX6EM) | A group of women walking together down a palm-lined road |
+
+Essays 1, 2 and 6 are not published yet; their photos are ready to be set
+in frontmatter once the essays are added.
+
+## Worth replacing with your own photos
+
+- **1** — a photo from your Enugu City International Marathon.
+- **5** — the Fitness Space team working with members or on the service.
+- **6** — a consented photo of the Fitness Space community in a wellness
+  setting. Must not imply diagnosis, treatment or cure; no white coats,
+  hospital equipment, scans, anatomical illustrations or before-and-after photos.
