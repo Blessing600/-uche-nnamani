@@ -34,9 +34,6 @@ to 1800 × 1200 and stored in `public/images/writing/`.
 | 5 | `the-app-is-not-the-product.jpg` | Sweet Life — [v7XG_VbVABM](https://unsplash.com/photos/v7XG_VbVABM) | A small team around a table, sketching ideas by hand on sheets of paper |
 | 6 | `we-were-not-doctors-but-we-were-paying-attention.jpg` | Photographe EVJF Greg — [ZElvitmX6EM](https://unsplash.com/photos/ZElvitmX6EM) | A group of women walking together down a palm-lined road |
 
-Essays 1, 2 and 6 are not published yet; their photos are ready to be set
-in frontmatter once the essays are added.
-
 ## Worth replacing with your own photos
 
 - **1** — a photo from your Enugu City International Marathon.

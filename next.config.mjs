@@ -12,6 +12,12 @@ const nextConfig = {
         destination: "https://www.uchennamani.com/:path*",
         permanent: true,
       },
+      // Unpublished essay; send old links to Thoughts in Ink.
+      {
+        source: "/writing/why-community-should-come-before-code",
+        destination: "/writing",
+        permanent: false,
+      },
     ];
   },
 };
